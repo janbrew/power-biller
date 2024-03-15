@@ -166,7 +166,6 @@ public class App extends JFrame {
         container.add(maximize);
         container.add(exit);
 
-        //header.add(filler, "dock west");
         header.add(title, "dock center");
         header.add(container, "dock east");
 
@@ -275,7 +274,7 @@ public class App extends JFrame {
         seekField.setForeground(textColor);
         seekField.setOpaque(false);
         seekField.setBorder(null);
-        seekField.setColumns(45);
+        seekField.setColumns(50);
         seekField.setHorizontalAlignment(JTextField.CENTER);
 
         seekField.addMouseListener(new MouseAdapter() {
