@@ -319,7 +319,10 @@ public class App extends JFrame {
                     else if (seekField.getText().charAt(0) == '0') {
                         showSeekError("Meter Number is invalid", "Enter your Meter Number");
                     }
-
+                    
+                    else if (seekField.getText().equals("000000")) {
+                        showSeekError("Meter Number is invalid", "Enter your Meter Number");
+                    }
                     try {
                         meterNum = Integer.parseInt(seekField.getText());
 
@@ -335,54 +338,60 @@ public class App extends JFrame {
                     if (seekField.getText().length() != 5) {
                         showSeekError("Meter Reading is invalid", "Enter your Meter Reading");
                     }
-                    else {
-                        try {
-                            meterReading = Integer.parseInt(seekField.getText());
+
+                    else if (seekField.getText().charAt(0) == '0') {
+                        showSeekError("Meter Reading is invalid", "Enter your Meter Reading");
+                    }
+
+                    else if (seekField.getText().equals("00000")) {
+                        showSeekError("Meter Reading is invalid", "Enter your Meter Reading");
+                    }
+
+                    try {
+                        meterReading = Integer.parseInt(seekField.getText());
     
-                            seekField.setText("Enter your Meter Number");
+                        seekField.setText("Enter your Meter Number");
 
-                            Biller biller = new Biller(meterNum, meterReading);
+                        Biller biller = new Biller(meterNum, meterReading);
 
-                            String[] account = biller.get();
+                        String[] account = biller.get();
 
-                            if (meterReading != Integer.parseInt(account[1])) {
-                                String[] newAcc = account.clone();
+                        if (meterReading != Integer.parseInt(account[1])) {
+                            String[] newAcc = account.clone();
 
-                                newAcc[1] = String.valueOf(meterReading);
+                            newAcc[1] = String.valueOf(meterReading);
 
-                                new Reader().update(account, newAcc);
-                            }
+                            new Reader().update(account, newAcc);
+                        }
 
-                            int usedKwh = biller.calculateKilowatt(account);
-                            double payAmount = biller.calculatePayAmount(usedKwh, account);
+                        int usedKwh = biller.calculateKilowatt(account);
+                        double payAmount = biller.calculatePayAmount(usedKwh, account);
 
-                            numValue.setText(String.valueOf(meterNum));
-                            customerValue.setText(account[2].toUpperCase());
+                        numValue.setText(String.valueOf(meterNum));
+                        customerValue.setText(account[2].toUpperCase());
 
-                            currReadingValue.setText(String.format("%,d", meterReading));
-                            prevReadingValue.setText(String.format("%,d", Integer.parseInt(account[1])));
-                            kwhUsedValue.setText(String.format("%,d KW/H", usedKwh));
+                        currReadingValue.setText(String.format("%,d", meterReading));
+                        prevReadingValue.setText(String.format("%,d", Integer.parseInt(account[1])));
+                        kwhUsedValue.setText(String.format("%,d KW/H", usedKwh));
 
-                            amountValue.setText(String.format("Php. %1$,.2f", payAmount));
+                        amountValue.setText(String.format("Php. %1$,.2f", payAmount));
                             
-                            numValue.repaint();
-                            customerValue.repaint();
-                            currReadingValue.repaint();
-                            prevReadingValue.repaint();
-                            kwhUsedValue.repaint();
-                            amountValue.repaint();
+                        numValue.repaint();
+                        customerValue.repaint();
+                        currReadingValue.repaint();
+                        prevReadingValue.repaint();
+                        kwhUsedValue.repaint();
+                        amountValue.repaint();
 
-                            home.remove(tableContainer);
-                            createTablePanel();
-                            home.repaint();
-                            currentSeek = 0;
-                        }
-                        catch (NumberFormatException numExc) {
-                            showSeekError("Meter Reading is invalid", "Enter your Meter Reading");
-                        }
+                        home.remove(tableContainer);
+                        createTablePanel();
+                        home.repaint();
+                        currentSeek = 0;
+                    }
+                    catch (NumberFormatException numExc) {
+                        showSeekError("Meter Reading is invalid", "Enter your Meter Reading");
                     }
                 }
-
             }
         });
 

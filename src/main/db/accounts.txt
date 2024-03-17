@@ -12,13 +12,4 @@
 343434  34343  commercial
 454545  45454  residential
 565656  56565  commercial
-676767  67676  residential
-787878  78787  commercial
-898989  89898  residential
-101010  10101  commercial
-676755  56565  residential
-746556  12111  residential
-123456  12345  residential
-989898  77112  commercial
-125689  67349  commercial
-879064  23232  commercial
+909090  11111  commercial

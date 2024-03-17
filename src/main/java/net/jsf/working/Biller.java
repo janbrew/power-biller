@@ -23,7 +23,7 @@ public class Biller {
             String[] customerTypes = {"residential", "commercial"};
             String customerType = customerTypes[new Random().nextInt(2)];
 
-            String[] newData = {String.valueOf(this.meterNumber), String.valueOf(0), customerType};
+            String[] newData = {String.valueOf(this.meterNumber), "00000", customerType};
             
             Reader.append(newData);
             

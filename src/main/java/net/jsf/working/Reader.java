@@ -1,25 +1,32 @@
 package net.jsf.working;
 
 import java.util.ArrayList;
-import java.io.*;
+import java.util.List;
+import java.io.FileReader;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.*;
 
 public class Reader {
     static ArrayList<String[]> data = null;
-    static File file = new File("src/main/resources/accounts.txt");
+    static Path file = Paths.get("src/main/db/accounts.txt");
 
     public Reader() {
         data = new ArrayList<>();
-
-        try (BufferedReader buffRead = new BufferedReader(new FileReader(Reader.file))) {
-            String fileLine = null;
-
-            while ((fileLine = buffRead.readLine()) != null) {
-                data.add(fileLine.split("  "));
-            }
+        List<String> fileLines = null;
+        
+        try {
+            fileLines = Files.readAllLines(file);
         }
 
-        catch (Exception error) {
+        catch (IOException error) {
             error.printStackTrace();
+        }
+
+        finally {
+            for (String fileLine: fileLines) {
+                data.add(fileLine.split("  "));
+            }
         }
     }
 
@@ -42,20 +49,19 @@ public class Reader {
                 builder.append(stringData2 + "\n");
                 continue;
             }
-            
-            builder.append(stringDataArray + "\n");
 
             if (Reader.data.indexOf(dataArray) == Reader.data.size() - 1) {
-                builder.delete(builder.length() - 1, builder.length());
+                builder.append(stringDataArray);
+            }
+            else {
+                builder.append(stringDataArray + "\n");
             }
         }
 
-        try (FileWriter writer = new FileWriter(Reader.file, false)) {
-            writer.write(builder.toString());
-            writer.close();
+        try {
+            Files.writeString(file, builder.toString(), StandardCharsets.UTF_8, StandardOpenOption.CREATE);
         }
-
-        catch (Exception error) {
+        catch (IOException error) {
             error.printStackTrace();
         }
     }
@@ -63,12 +69,22 @@ public class Reader {
     public static void append(String[] newData) {
         String stringNewData = String.format("%s  %s  %s", newData[0], newData[1], newData[2]);
 
-        try (FileWriter writer = new FileWriter(Reader.file, true)) {
-            writer.write("\n" + stringNewData);
-            writer.close();
+        try {
+            FileReader reader = new FileReader(file.toFile());
+            int lastChar = -1;
+
+            reader.skip(file.toFile().length() - 1);
+            lastChar = reader.read();
+            reader.close();
+
+            
+            if (lastChar != '\n' && lastChar != -1) {
+                Files.writeString(file, "\n", StandardCharsets.UTF_8, StandardOpenOption.APPEND);
+            }
+            Files.writeString(file, stringNewData, StandardCharsets.UTF_8, StandardOpenOption.APPEND);
         }
 
-        catch (Exception error) {
+        catch (IOException error) {
             error.printStackTrace();
         }
     }
