@@ -138,6 +138,7 @@ public class App extends JFrame {
     public App() {
         super.setUndecorated(true);
         super.setPreferredSize(new Dimension(1250, 800));
+        super.setIconImage(new ImageIcon("src/main/resources/Icon.png").getImage());
         initComponents();
         pack();
     }
