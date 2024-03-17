@@ -143,7 +143,7 @@ public class App extends JFrame {
     }
 
     private void createHeader() {
-        header = new JPanel(new MigLayout("wrap, fill, align 25% 50%", "100px[][]"));
+        header = new JPanel(new MigLayout("wrap, fill, align 25% 50%", "190px[][]"));
         JPanel container = new JPanel(new MigLayout("wrap, align 50% 50%, flowy", "[]30px[]30px[]30px"));
         filler = new Filler(getMinimumSize(), getPreferredSize(), getMaximumSize());
         minimize = createHeaderButton("//");
@@ -350,7 +350,7 @@ public class App extends JFrame {
                             }
 
                             int usedKwh = biller.calculateKilowatt(account);
-                            double payAmount = biller.calculatePayAmount(account);
+                            double payAmount = biller.calculatePayAmount(usedKwh, account);
 
                             numValue.setText(String.valueOf(meterNum));
                             customerValue.setText(account[2].toUpperCase());

@@ -1,9 +1,9 @@
-111111  99999  residential
+111111  77777  residential
 222222  55555  commercial
 333333  77777  residential
 444444  34343  commercial
 555555  55555  residential
-666666  44444  commercial
+666666  22222  commercial
 777777  33333  residential
 888888  12121  commercial
 999999  11111  residential

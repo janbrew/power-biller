@@ -39,19 +39,15 @@ public class Biller {
         return this.presentMeterReading - Integer.parseInt(data[1]);
     }
 
-    public double calculatePayAmount(String[] data) {
-        int kilowatt = Integer.parseInt(data[0]);
-
-        if (data[2].equals("residential")) {
+    public double calculatePayAmount(int kilowatt, String[] data) {
+        if (data[2].equals("residential")) {    
             if (kilowatt <= 100) {
                 return kilowatt * 1.50;
             }
             else if (kilowatt > 100 && kilowatt <= 200) {
                 return kilowatt * 2.00;
             }
-            else {
-                return kilowatt * 2.50;
-            }
+            return kilowatt * 2.50;
         }
         else {
             if (kilowatt <= 100) {
@@ -60,9 +56,7 @@ public class Biller {
             else if (kilowatt > 100 && kilowatt <= 200) {
                 return kilowatt * 4.00;
             }
-            else {
-                return kilowatt * 5.00;
-            }
+            return kilowatt * 5.00;
         }
     }
 }
