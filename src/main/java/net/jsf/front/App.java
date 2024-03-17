@@ -314,16 +314,19 @@ public class App extends JFrame {
                     if (seekField.getText().length() != 6) {
                         showSeekError("Meter Number is invalid", "Enter your Meter Number");
                     }
-                    else {
-                        try {
-                            meterNum = Integer.parseInt(seekField.getText());
 
-                            seekField.setText("Enter your Meter Reading");
-                            currentSeek = 1;
-                        }
-                        catch (NumberFormatException numExc) {
-                            showSeekError("Meter Number is invalid", "Enter your Meter Number");
-                        }
+                    else if (seekField.getText().charAt(0) == '0') {
+                        showSeekError("Meter Number is invalid", "Enter your Meter Number");
+                    }
+
+                    try {
+                        meterNum = Integer.parseInt(seekField.getText());
+
+                        seekField.setText("Enter your Meter Reading");
+                        currentSeek = 1;
+                    }
+                    catch (NumberFormatException numExc) {
+                        showSeekError("Meter Number is invalid", "Enter your Meter Number");
                     }
                 }
 
