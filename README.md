@@ -16,8 +16,6 @@ current and previous meter reading (both are the same when the customer is a new
     - kwh < 100, 100 < kwh <= 200, kwh > 200
     - multiplier for residential: 1.50, 2.00, 2.50
     - multiplier for commercial: 3.00, 4.00, 5.00
-    
-*like wtf did they expect. the kwh will not go below that point if the required digit is 5, thus, rendering the other multipliers except 200~ useless. hello?????*
 
 ### GUI
 ![alt text](src/main/resources/image.png)
